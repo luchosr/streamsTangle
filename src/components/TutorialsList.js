@@ -27,7 +27,7 @@ const TutorialsList = () => {
       .then(response => response.json())
       .then(response => {
         const { children } = response.data;
-        setredditPost(children);
+        setDeviceData(children);
       })
       .catch(error => seterror(error))
       .finally(() => setisLoading(false));
