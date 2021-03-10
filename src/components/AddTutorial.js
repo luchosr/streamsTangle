@@ -10,6 +10,8 @@ const AddTutorial = () => {
   };
   const [tutorial, setTutorial] = useState(initialTutorialState);
   const [submitted, setSubmitted] = useState(false);
+  
+
 
   const handleInputChange = event => {
     const { name, value } = event.target;
@@ -55,7 +57,7 @@ const AddTutorial = () => {
       ) : (
         <div>
           <div className="form-group">
-            <label htmlFor="title">Title</label>
+            <label htmlFor="title">Nombre</label>
             <input
               type="text"
               className="form-control"
@@ -68,7 +70,7 @@ const AddTutorial = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="description">Description</label>
+            <label htmlFor="description">Hash del canal</label>
             <input
               type="text"
               className="form-control"
@@ -81,7 +83,7 @@ const AddTutorial = () => {
           </div>
 
           <button onClick={saveTutorial} className="btn btn-success">
-            Submit
+            Agregar
           </button>
         </div>
       )}

@@ -53,7 +53,7 @@ const Tutorial = props => {
     TutorialDataService.update(currentTutorial.id, currentTutorial)
       .then(response => {
         console.log(response.data);
-        setMessage("The tutorial was updated successfully!");
+        setMessage("El dispositivo ha sido actualizado con éxito!");
       })
       .catch(e => {
         console.log(e);
@@ -140,7 +140,7 @@ const Tutorial = props => {
       ) : (
         <div>
           <br />
-          <p>Please click on a Tutorial...</p>
+          <p>Haga click en un dispositivo ...</p>
         </div>
       )}
     </div>

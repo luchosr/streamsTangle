@@ -4,9 +4,13 @@ import { Link } from "react-router-dom";
 
 const TutorialsList = () => {
   const [tutorials, setTutorials] = useState([]);
+  const [error, seterror] = useState(null);
+  const [isLoading, setisLoading] = useState(false);
   const [currentTutorial, setCurrentTutorial] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(-1);
   const [searchTitle, setSearchTitle] = useState("");
+  const [deviceData, setDeviceData] = useState([]);
+
 
   useEffect(() => {
     retrieveTutorials();
@@ -16,6 +20,20 @@ const TutorialsList = () => {
     const searchTitle = e.target.value;
     setSearchTitle(searchTitle);
   };
+
+  const fetchDeviceData = async () => {
+    setisLoading(true);
+    await fetch("https://www.reddit.com/r/javascript.json")
+      .then(response => response.json())
+      .then(response => {
+        const { children } = response.data;
+        setredditPost(children);
+      })
+      .catch(error => seterror(error))
+      .finally(() => setisLoading(false));
+  };
+
+
 
   const retrieveTutorials = () => {
     TutorialDataService.getAll()
@@ -68,7 +86,7 @@ const TutorialsList = () => {
           <input
             type="text"
             className="form-control"
-            placeholder="Search by title"
+            placeholder="Buscar por Nombre"
             value={searchTitle}
             onChange={onChangeSearchTitle}
           />
@@ -78,13 +96,13 @@ const TutorialsList = () => {
               type="button"
               onClick={findByTitle}
             >
-              Search
+              Buscar
             </button>
           </div>
         </div>
       </div>
       <div className="col-md-6">
-        <h4>Tutorials List</h4>
+        <h4>Lista de Dispositivos</h4>
 
         <ul className="list-group">
           {tutorials &&
@@ -105,43 +123,51 @@ const TutorialsList = () => {
           className="m-3 btn btn-sm btn-danger"
           onClick={removeAllTutorials}
         >
-          Remove All
+          Borrar todos
         </button>
       </div>
       <div className="col-md-6">
         {currentTutorial ? (
           <div>
-            <h4>Tutorial</h4>
+            <h4>Dispositivo</h4>
             <div>
               <label>
-                <strong>Title:</strong>
+                <strong>Nombre:</strong>
               </label>{" "}
               {currentTutorial.title}
             </div>
             <div>
               <label>
-                <strong>Description:</strong>
+                <strong>Hash del canal:</strong>
               </label>{" "}
               {currentTutorial.description}
             </div>
             <div>
               <label>
-                <strong>Status:</strong>
+                <strong>Ultima lectura:</strong>
               </label>{" "}
-              {currentTutorial.published ? "Published" : "Pending"}
+              {currentTutorial.published ? "Published" : "25/02/2021"}
             </div>
+            <div>
+              <label>
+                <strong>Lectura:</strong>
+              </label>{" "}
+              
 
+                "sensor": "BMP180-Enviromental"
+            
+            </div>
             <Link
               to={"/tutorials/" + currentTutorial.id}
               className="badge badge-warning"
             >
-              Edit
+              Editar
             </Link>
           </div>
         ) : (
           <div>
             <br />
-            <p>Please click on a Tutorial...</p>
+            <p>Haga clicl en un dispositivo...</p>
           </div>
         )}
       </div>
