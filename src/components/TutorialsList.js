@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const TutorialsList = () => {
   const [tutorials, setTutorials] = useState([]);
   const [error, seterror] = useState(null);
+  const [isClicked, setIsClicked] = useState(false);
   const [isLoading, setisLoading] = useState(false);
   const [currentTutorial, setCurrentTutorial] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(-1);
@@ -55,6 +56,8 @@ const TutorialsList = () => {
   const setActiveTutorial = (tutorial, index) => {
     setCurrentTutorial(tutorial);
     setCurrentIndex(index);
+    setIsClicked(true);
+
   };
 
   const removeAllTutorials = () => {
@@ -125,7 +128,12 @@ const TutorialsList = () => {
         >
           Borrar todos
         </button>
+
+        <div className="data-list">
+
+        </div>
       </div>
+    
       <div className="col-md-6">
         {currentTutorial ? (
           <div>
@@ -167,10 +175,22 @@ const TutorialsList = () => {
         ) : (
           <div>
             <br />
-            <p>Haga clicl en un dispositivo...</p>
+            <p>Seleccione un dispositivo...</p>
           </div>
         )}
       </div>
+    {isClicked &&  <div className="row-md-6">
+        hola ke ase
+
+        <ul>
+          <li>Hola</li>
+          <li>Chau</li>
+          <li>Chau</li>
+          <li>Hola</li>
+          <li>Chau</li>
+          <li>Hola</li>
+        </ul>
+      </div>} 
     </div>
   );
 };
