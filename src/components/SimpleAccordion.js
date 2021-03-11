@@ -23,12 +23,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SimpleAccordion(props) {
-  const { heading, detail } = props;
+  const { heading, detail, key } = props;
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Accordion>
+      <Accordion >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"

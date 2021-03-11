@@ -28,12 +28,12 @@ const TutorialsList = () => {
 
   const fetchDeviceData = async () => {
     setisLoading(true);
-    await fetch("http://10.0.10.216:3002/messages/last")
+    await fetch("http://10.0.10.216:3002/messages?limit=3")
       .then(response => response.json())
       .then(response => {
       /*   const { children } = response.data;
         setDeviceData(children); */
-        setDeviceData(response.message);
+        setDeviceData(response);
 
       })
       .catch(error => seterror(error))
@@ -111,7 +111,7 @@ const TutorialsList = () => {
         </div>
       </div>
       <div className="col-md-6">
-        <h4>Lista de Hash del canal:</h4>
+        <h4>Lista de dispositivos:</h4>
 
         <ul className="list-group">
           {tutorials &&
@@ -144,33 +144,20 @@ const TutorialsList = () => {
         {currentTutorial ? (
           <div>
             <h4>Hash del canal:</h4>
-            <div>
+            <div  >
               <label>
                 <strong>Nombre:</strong>
               </label>{" "}
-              {currentTutorial.title}
+             <p style={{overflow:'auto'}}> {currentTutorial.title}</p>
             </div>
             <div>
               <label>
                 <strong>Hash del canal:</strong>
               </label>{" "}
-              {currentTutorial.description}
-            </div>
-            <div>
-              <label>
-                <strong>Ultima lectura:</strong>
-              </label>{" "}
-              {currentTutorial.published ? "Published" : "25/02/2021"}
-            </div>
-            <div>
-              <label>
-                <strong>Lectura:</strong>
-              </label>{" "}
+              <p style={{overflow:'auto'}}> {currentTutorial.description}</p>
               
-
-                "sensor": "BMP180-Enviromental"
-            
             </div>
+         
             <Link
               to={"/tutorials/" + currentTutorial.id}
               className="badge badge-warning"
@@ -187,39 +174,12 @@ const TutorialsList = () => {
       </div>
     { 
 
-      isClicked && <SimpleAccordion heading={`${new Date(parseInt(deviceData.timestamp)*1000)}`} detail='{
-        "id": 100,
-        "message": {
-            "device": "BCM2835-00000000ec2a41ff-9000c1",
-            "timestamp": "1615485519",
-            "iot2tangle": [
-                {
-                    "data": [
-                        {
-                            "Temp": "24.0"
-                        },
-                        {
-                            "Humidity": "34.0"
-                        }
-                    ],
-                    "sensor": "DHT11-environmental"
-                },
-                {
-                    "data": [
-                        {
-                            "Pressure": "94172.4905385",
-                            "Temp": "24.6955974201"
-                        },
-                        {
-                            "Altitude": "617.288299167"
-                        }
-                    ],
-                    "sensor": "BMP180-Enviromental"
-                }
-            ]
-        },
-        "channelId": "160a302ac63eb61ce1d13819b72fb47d8693197a335d04a0b9a8e18e4debca1b0000000000000000:29b6be0b5618f471058163ea"
-    }' />}
+    isClicked && deviceData.map(data => <SimpleAccordion key={data.id} heading={`${new Date(parseInt(data.message.timestamp)*1000)}`} detail={`${JSON.stringify(data)}`
+      
+   } />)
+    
+   
+    }
     </div>
   );
 };
