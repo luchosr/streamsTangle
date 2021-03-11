@@ -69,7 +69,7 @@ const AddTutorial = () => {
             />
           </div>
 
-          <div className="form-group">
+          <div className="form-group"  >
             <label htmlFor="description">Hash del canal</label>
             <input
               type="text"
