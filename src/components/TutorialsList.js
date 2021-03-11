@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TutorialDataService from "../services/TutorialService";
+import Acordion from "./Acordion"
 import { Link } from "react-router-dom";
 
 const TutorialsList = () => {
@@ -179,7 +180,7 @@ const TutorialsList = () => {
           </div>
         )}
       </div>
-    {isClicked &&  <div className="row-md-6">
+    {/* {isClicked &&  <div className="row-md-6">
         hola ke ase
 
         <ul>
@@ -190,7 +191,8 @@ const TutorialsList = () => {
           <li>Chau</li>
           <li>Hola</li>
         </ul>
-      </div>} 
+      </div>}  */
+      isClicked && <Acordion/>}
     </div>
   );
 };
